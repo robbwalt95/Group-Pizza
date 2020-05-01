@@ -1,0 +1,54 @@
+* {
+	margin: none;
+	padding: none;
+	box-sizing: border-box;
+}
+
+.itemButton {
+	margin-left: 0.2rem;
+	padding: 5px;
+	background-color: blue;
+	color: whitesmoke;
+	cursor: pointer;
+}
+
+.listItem {
+	text-decoration: none;
+	list-style: none;
+	margin-bottom: 0.5rem;
+}
+
+.pizzaItem {
+	width: 250px;
+	height: 50px;
+	padding: 20px;
+	background-color: #ddd;
+	margin-bottom: 0.5rem;
+	text-align: center;
+
+}
+
+.pizzaItem:hover {
+	cursor: pointer;
+}
+
+.selected {
+	background-color: aqua;
+	cursor: pointer;
+}
+
+.outOfStockPizza {
+	background: salmon;
+}
+
+.delete{
+	color:red;
+}
+
+#logout-button {
+	display: none;
+}
+
+#inventory {
+	display: none;
+}
