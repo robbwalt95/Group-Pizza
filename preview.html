@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Luigi's Pizzeria - Preview Luigi's Menu </title>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <!--CSS Navigation-->
+   <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="css/preMenu.css">
+   <!--FireBase Start-->
+   <!-- update the version number as needed -->
+   <script defer src="/__/firebase/7.14.1/firebase-app.js"></script>
+   <!-- include only the Firebase features as you need -->
+   <script defer src="/__/firebase/7.14.1/firebase-auth.js"></script>
+   <script defer src="/__/firebase/7.14.1/firebase-database.js"></script>
+   <script defer src="/__/firebase/7.14.1/firebase-storage.js"></script>
+   <script defer src="/__/firebase/7.14.0/firebase-functions.js"></script>
+   <script defer src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
+   <!-- initialize the SDK after all desired features are loaded -->
+   <script defer src="/__/firebase/init.js"></script>
+   <!--FireBase End-->
+   
+
+</head>
+
+<body style=" background-color: #f2e9bd; font-family: Verdana, sans-serif; ">
+   <!--Banner Start -->
+   <p><img src="img/luigi2.png" alt="Luigi's Logo" height="140px"
+         style="max-width: 50%;  float:left;"><b>Available:</b><br>Monday - Sunday <br> 10am - 2am <br>
+      <br><b>Call:</b> 1-800-888-888 <br> <br><b> Or Order Online! </b></p>
+	  <!-- Banner End -->
+	  
+	  <!-- Nav Start -->
+   <div class="topnav" id="myTopnav">
+      <a href="index.html">Home</a>
+      <a href="menu.html" id="menu">Luigi's Menu</a>
+	  <a href="preview.html" class="current" id="preview">Preview Menu</a>
+      <div class="dropdown">
+         <button class="dropbtn">Accounts
+            <i class="fa fa-caret-down"></i>
+         </button>
+         <div class="dropdown-content">
+            <input id="login-email" type="text" name="email" placeholder="Enter email">
+            <input id="login-password" type="password" name="password" placeholder="Enter password">
+            <button id="login-button">Login</button>
+            <button id="logout-button">Logout</button>
+            <span id="currentUser"></span>
+            <a id="accountInfo" href="account.html">Account Information</a>
+         </div>
+      </div>
+      <a href="items.html" id="inventory">Inventory</a>
+      <a href="orders.html" id="orders">Orders</a>
+      <a href="register.html" id="register">Register</a>
+      <a href="users.html" id="users">Users</a>
+      <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+   </div>
+   <!-- Nav End -->
+   <!-- HTML_Start_Body -->
+   <div style="padding-left:16px">
+      <h1>Preview Luigi's Pizzeria Menu!</h1>
+	  <h2>To place an order online, please log in or create an account</h2>
+
+<!-- Menu Start-->
+<ul class="menu">
+  <li class="menu-item">
+    <section>
+      <header>
+        <h1>Item Name</h1>
+        <span class="spacer"></span>
+        <span class="price">$9.99</span>
+      </header>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt deserunt minima praesentium blanditiis, ipsum dicta quam laborum esse magnam nemo unde consequatur autem mollitia consequuntur quaerat vel quis quos error.</p>
+    </section>
+  </li>
+  <li class="menu-item">
+    <section>
+      <header>
+        <h1>Item Name</h1>
+        <span class="spacer"></span>
+        <span class="price">$9.99</span>
+      </header>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum neque nemo, laborum tenetur suscipit veritatis a. Accusantium ipsam sequi consequatur? Vel inventore, tempora omnis praesentium fugit incidunt iure dicta corporis.</p>
+    </section>
+  </li>
+  <li class="menu-item">
+    <section>
+      <header>
+        <h1>Item Name</h1>
+        <span class="spacer"></span>
+        <span class="price">$9.99</span>
+      </header>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis recusandae possimus natus eaque doloremque eligendi expedita sequi saepe enim ipsam. Quasi reiciendis laudantium in dolor. Sint quam, officiis consequuntur ratione.</p>
+    </section>
+  </li>
+  <li class="menu-item">
+    <section>
+      <header>
+        <h1>Item Name</h1>
+        <span class="spacer"></span>
+        <span class="price">$9.99</span>
+      </header>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam nemo, ipsam, maxime blanditiis autem culpa esse praesentium mollitia beatae voluptatibus architecto! Quaerat dolore aut illum, quia voluptate obcaecati consequatur quod.</p>
+    </section>
+  </li>
+  <li class="menu-item">
+    <section>
+      <header>
+        <h1>Item Name</h1>
+        <span class="spacer"></span>
+        <span class="price">$9.99</span>
+      </header>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam veniam assumenda magni eos sapiente aspernatur illum, ad error quas repudiandae nam tempora sed beatae facilis neque similique velit aliquam suscipit.</p>
+    </section>
+  </li>
+  <li class="menu-item">
+    <section>
+      <header>
+        <h1>Item Name</h1>
+        <span class="spacer"></span>
+        <span class="price">$9.99</span>
+      </header>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, nam tenetur aliquid beatae asperiores accusamus magni. Officia illo fuga ducimus eaque alias, aliquid nostrum odit, eos voluptates vel reprehenderit, natus.</p>
+    </section>
+  </li>
+</div>
+<!-- Menu End-->
+
+   </div>
+   <!-- HTML_End_Body -->
+   
+   <!-- JS_Script Files -->
+   <script defer src="js/app.js"></script>
+   <script defer src="js/preMenu.js"></script>
+
+</body>
+
+</html>

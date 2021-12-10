@@ -1,58 +1,18 @@
 const loginButton = document.querySelector('#login-button');
 const logoutButton = document.querySelector('#logout-button');
-const pizzaList = document.querySelector('#pizzas');
-const toppingsList = document.querySelector('#toppings');
 const inventoryLink = document.querySelector('#inventory');
 const ordersLink = document.querySelector('#orders');
+const usersLink = document.querySelector('#users');
 const registerLink = document.querySelector('#register');
-const addToCart = document.querySelector('#addToCart');
-const checkout = document.querySelector('#checkout');
-const cartItems = document.querySelector('#cartItems');
-let shoppingCart = [];
-let cartItemId = 0;
-let total = 0;
+const currentUser = document.querySelector('#currentUser');;
+const loginEmail = document.querySelector('#login-email');
+const loginPassword = document.querySelector('#login-password');
+const accountInfo = document.querySelector('#accountInfo');
+const orderHistoryLink = document.querySelector('#orderHistory');
 
-const db = firebase.firestore().collection('items').get();
-db
-	.then((items) => {
-		items.forEach((item) => {
-			let data = item.data();
-			if (data.type === 'pizza') {
-				let pizzaItem = `<div class="pizzaItem inStockPizza" name="${data.name}" value=${data.price}>${data.name}  ${data.price.toFixed(2)}</div>`;
-				if (!data.inStock) {
-					pizzaItem = `<div class="pizzaItem outOfStockPizza" name="${data.name}" value=${data.price}>${data.name}  ${data.price.toFixed(2)}</div>`;
-				}
-				pizzaList.innerHTML += pizzaItem;
-			}
-			else {
-				let toppingItem = `<input class="topping" name="${data.name}" type="checkbox" value=${data.price}>${data.name} ${data.price.toFixed(2)}</input>`;
-				if (!data.inStock) {
-					toppingItem = `<input class="topping"type="checkbox" name="${data.name}" value=${data.price} disabled>${data.name} ${data.price.toFixed(2)}</input>`;
-				}
-				toppingsList.innerHTML += toppingItem;
-			}
-		});
-	})
-	.then(() => {
-		let pizzas = document.querySelectorAll('.inStockPizza');
-		pizzas.forEach((pizza) => {
-			pizza.addEventListener('click', (e) => {
-				pizzaDisplay(e.target);
-			});
-		});
-	});
+const previewLink = document.querySelector('#preview');
+const menuLink = document.querySelector('#menu');
 
-const pizzaDisplay = (target) => {
-	let pizzas = document.querySelectorAll('.inStockPizza');
-	pizzas.forEach((pizza) => {
-		if (pizza == target) {
-			pizza.classList.toggle('selected');
-		}
-		else {
-			pizza.classList.remove('selected');
-		}
-	});
-};
 
 loginButton.addEventListener('click', () => {
 	let email = document.querySelector('#login-email').value;
@@ -64,122 +24,77 @@ loginButton.addEventListener('click', () => {
 			console.log('logged in', user);
 		})
 		.catch((error) => {
-			console.log(error);
+			currentUser.textContent = error;
 		});
 	document.querySelector('#login-email').value = '';
 	document.querySelector('#login-password').value = '';
 });
 
 logoutButton.addEventListener('click', () => {
-	firebase.auth().signOut().then(() => console.log('signed out'));
+	firebase.auth().signOut().then(() => currentUser.textContent = 'Signed out.');
 });
 
-addToCart.addEventListener('click', () => {
-	if (document.querySelector('.selected') === null) {
-		console.log('Please select a Pizza.');
-		return;
-	}
-	let cartItem = {};
-	let toppings = [];
-	let pizza = document.querySelector('.selected');
-	let selectedToppings = document.querySelectorAll('.topping');
 
-	let price = +pizza.getAttribute('value');
-
-	selectedToppings.forEach((topping) => {
-		if (topping.checked) {
-			toppings.push(topping.getAttribute('name'));
-			price += +topping.value;
-		}
-	});
-	cartItemId++;
-	cartItem.Id = cartItemId;
-	cartItem.pizza = pizza.getAttribute('name');
-	cartItem.toppings = toppings;
-	cartItem.price = price;
-	shoppingCart.push(cartItem);
-	renderCart();
-});
-
-const renderCart = async () => {
-	total = 0;
-	let html = ``;
-	shoppingCart.forEach(cartItem => {
-		let item = `<div id=${cartItem.Id}>Size: ${cartItem.pizza} Toppings: ${cartItem.toppings} Price: ${cartItem.price.toFixed(2)}  <span class="delete"> X </span></div>`;
-		html += item;
-		total += cartItem.price;
-	});
-	cartItems.innerHTML = html;
-	if (total > 0) {
-		document.querySelector("#total").innerHTML = `Total: ${total.toFixed(2)}`;
+// START -- Nav Code
+function myFunction() {
+	var x = document.getElementById("myTopnav");
+	if (x.className === "topnav") {
+		x.className += " responsive";
 	} else {
-		document.querySelector("#total").innerHTML = ``;
+		x.className = "topnav";
 	}
-	const deleteButtons = document.querySelectorAll('.delete');
-	deleteButtons.forEach(button => {
-		button.addEventListener("click", (e) => {
-			deleteCartItem(e.target);
-		})
-	})
-
-};
-
-const deleteCartItem = target => {
-	const Id = target.parentElement.getAttribute("id");
-	shoppingCart = shoppingCart.filter(cartItem => cartItem.Id !== +Id);
-	renderCart();
-
 }
+// END -- Nav Code
 
-checkout.addEventListener('click', () => {
-	const user = firebase.auth().currentUser;
-	const createOrder = firebase.functions().httpsCallable('createOrder');
-	const pizzaSize = document.querySelector(".selected");
-	if (pizzaSize === null) {
-		console.log("Please select pizza size.");
-		console.log(pizzaSize);
-		return false;
-	}
-	if (user) {
-		const orderData = {
-			items: shoppingCart,
-			total
-		}
-		console.log(orderData);
-		createOrder(orderData);
-		document.querySelector('.selected').classList.remove('selected');
-		let selectedToppings = document.querySelectorAll('.topping');
-		selectedToppings.forEach(topping => {
-			topping.checked === false;
-		});
-		console.log('Order Placed!');
-		shoppingCart = [];
-		cartItemId = 0;
-		renderCart();
-	}
-	else {
-		console.log('Please log in to order.');
-	}
-});
-
+// START - Switch content depending on the user
 const checkManager = firebase.functions().httpsCallable('checkManager');
-firebase.auth().onAuthStateChanged((user) => {
+firebase.auth().onAuthStateChanged(user => {
+	//logged in user sees:
 	if (user) {
 		logoutButton.style.display = 'block';
 		loginButton.style.display = 'none';
 		registerLink.style.display = 'none';
+		currentUser.textContent = `Logged in as ${user.email}`;
+		loginEmail.style.display = 'none';
+		loginPassword.style.display = 'none';
+		accountInfo.style.display = 'block';
+		inventoryLink.style.display = 'none';
+		ordersLink.style.display = 'none';
+		usersLink.style.display = 'none';
+		loginPassword.style.display = "none";
+		orderHistoryLink.style.display = 'block';
+		
+		previewLink.style.display = "none";
+		menuLink.style.display = 'block';
+		
+		//Managers sees:
 		checkManager().then((result) => {
 			if (result.data === true) {
 				inventoryLink.style.display = 'block';
 				ordersLink.style.display = 'block';
+				usersLink.style.display = 'block';
+				
+				previewLink.style.display = "block";
+				menuLink.style.display = 'block';
 			}
 		});
 	}
+	//Not logged in user sees:
 	else {
 		logoutButton.style.display = 'none';
 		loginButton.style.display = 'block';
 		inventoryLink.style.display = 'none';
 		ordersLink.style.display = 'none';
 		registerLink.style.display = 'block';
+		usersLink.style.display = 'none';
+		currentUser.textContent = '';
+		loginEmail.style.display = 'block';
+		loginPassword.style.display = 'block';
+		accountInfo.style.display = 'none';
+		orderHistoryLink.style.display = 'none';
+		
+		previewLink.style.display = "block";
+		menuLink.style.display = 'none';
 	}
 });
+// END -- Switch content depending on the user

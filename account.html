@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Luigi's Pizzeria - Account Info</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--CSS Navigation-->
+    <link rel="stylesheet" href="css/style.css">
+    <!--FireBase Start-->
+    <script defer src="/__/firebase/7.14.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/7.14.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/7.14.1/firebase-database.js"></script>
+    <script defer src="/__/firebase/7.14.1/firebase-storage.js"></script>
+    <script defer src="/__/firebase/7.14.0/firebase-functions.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+    <!--FireBase End-->
+</head>
+<body>
+<!-- Banner Start -->
+<p><img src="img/luigi2.png" alt="Luigi's Logo" height="140px"
+        style="max-width: 50%;  float:left;"><b>Available:</b><br>Monday - Sunday <br> 10am - 2am <br>
+    <br><b>Call:</b> 1-800-888-888 <br> <br><b> Or Order Online! </b></p>
+	<!-- Banner End -->
+	<!-- Nav Start -->
+<div class="topnav" id="myTopnav">
+    <a href="index.html">Home</a>
+      <a href="menu.html" id="menu">Luigi's Menu</a>
+	  <a href="preview.html" id="preview">Preview Menu</a>
+    <div class="dropdown">
+        <button class="dropbtn">Accounts
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <input id="login-email" type="text" name="email" placeholder="Enter email">
+            <input id="login-password" type="password" name="password" placeholder="Enter password">
+            <button id="login-button">Login</button>
+            <button id="logout-button">Logout</button>
+            <span id="currentUser"></span>
+            <a id="accountInfo" href="account.html">Account Information</a>
+            <a id="orderHistory" href="orderHistory.html">Order History</a>
+        </div>
+    </div>
+    <a href="items.html" id="inventory">Inventory</a>
+    <a href="orders.html" id="orders">Orders</a>
+    <a href="register.html" id="register" class="current">Register</a>
+    <a href="users.html" id="users">Users</a>
+    <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+</div>
+<!-- Nav End -->
+<!-- Content Start -->
+<div id="container">
+    <h2>Account Information</h2>
+    <input class="accountInput" type="text" id="firstName" placeholder="First Name" required><br>
+    <input class="accountInput" type="text" id="lastName" placeholder="Last Name" required><br>
+    <input class="accountInput" type="tel" id="phoneNumber" name="phone" placeholder="Phone Number" required><br>
+    <input class="accountInput" type="text" id="address" name="address" placeholder="Street Address" required><br>
+    <input class="accountInput" type="text" id="city" name="city" placeholder="City" required> <br>
+    <input class="accountInput" type="text" id="state" name="state" placeholder="State" required><br>
+    <input class="accountInput" type="text" id="zip" name="zip" placeholder="Zip Code" required> <br>
+    <button id="accountButton">Update Account Info</button>
+    <p id="message"></p>
+
+</div>
+
+<!-- Content End-->
+<!-- JS File -->
+<script defer src="js/account.js"></script>
+</body>
+
+</html>

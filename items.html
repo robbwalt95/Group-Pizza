@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Luigi's Pizza - Admin</title>
+
+  <!-- update the version number as needed -->
+  <script defer src="/__/firebase/7.14.1/firebase-app.js"></script>
+  <!-- include only the Firebase features as you need -->
+  <script defer src="/__/firebase/7.14.1/firebase-auth.js"></script>
+  <script defer src="/__/firebase/7.14.1/firebase-database.js"></script>
+  <script defer src="/__/firebase/7.14.1/firebase-storage.js"></script>
+  <script defer src="/__/firebase/7.14.0/firebase-functions.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
+  <!-- initialize the SDK after all desired features are loaded -->
+  <script defer src="/__/firebase/init.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+<!-- Banner Start -->
+  <p><img src="img/luigi2.png" alt="Luigi's Logo" height="140px"
+      style="max-width: 50%;  float:left;"><b>Available:</b><br>Monday - Sunday <br> 10am - 2am <br>
+    <br><b>Call:</b> 1-800-888-888 <br> <br><b> Or Order Online! </b></p>
+	<!-- Nav Start -->
+  <div class="topnav" id="myTopnav">
+    <a href="index.html">Home</a>
+      <a href="menu.html" id="menu">Luigi's Menu</a>
+	  <a href="preview.html" id="preview">Preview Menu</a>
+	  <div class="dropdown">
+      <button class="dropbtn">Accounts
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <input id="login-email" type="text" name="email" placeholder="Enter email">
+        <input id="login-password" type="password" name="password" placeholder="Enter password">
+        <button id="login-button">Login</button>
+        <button id="logout-button">Logout</button>
+        <span id="currentUser"></span>
+        <a id="accountInfo" href="account.html">Account Information</a>
+        <a id="orderHistory" href="orderHistory.html">Order History</a>
+      </div>
+    </div>
+    <a href="items.html" id="inventory" class="current">Inventory</a>
+    <a href="orders.html" id="orders">Orders</a>
+    <a href="register.html" id="register">Register</a>
+    <a href="users.html" id="users">Users</a>
+    <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+  </div>
+<!-- Nav End -->
+<!-- Content Start-->
+  <div id=container>
+    <h2>Items</h2>
+    <div id="itemList">
+
+    </div>
+  </div>
+  
+  <!-- Content End-->
+  <!-- JS File -->
+  <script defer src="js/items.js"></script>
+  <script defer src="js/app.js"></script>
+</body>
+
+</html>
